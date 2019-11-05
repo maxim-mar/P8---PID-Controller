@@ -1,44 +1,46 @@
-#include "PID.h"
+#ifndef PID_H
+#define PID_H
 
-/*
-* Initialize PID control, update the cross-track error, update PID
-* coefficients, Twiddle, and calculate the total error (steering angle).
-*/
-
-PID::PID() {}
-
-PID::~PID() {}
-
-void PID::Init(double Kp_, double Ki_, double Kd_) {
+class PID {
+public:
   /*
-  * Initialize PID controller with the coefficients as the input values.
-  * Note that the inputs to the function need different names than the
-  * class variables or this will not work correctly.
+  * Errors
   */
-  
-  Kp = Kp_;
-  Ki = Ki_;
-  Kd = Kd_;
-  
-}
+  double p_error = 0;
+  double i_error = 0;
+  double d_error = 0;
 
-void PID::UpdateError(double cte) {
   /*
-  * Updates error values for calculating total error below.
+  * Coefficients
+  */ 
+  double Kp;
+  double Ki;
+  double Kd;
+  
+  /*
+  * Constructor
   */
-  
-  // d_error is difference from old cte (p_error) to the new cte
-  d_error = (cte - p_error);
-  // p_error gets set to the new cte
-  p_error = cte;
-  // i_error is the sum of ctes to this point
-  i_error += cte;
-  
-}
+  PID();
 
-double PID::TotalError() {
-  
-  // Return the total error of each coefficient multiplied by the respective error
-  return -Kp * p_error - Kd * d_error - Ki * i_error;
-  
-}
+  /*
+  * Destructor.
+  */
+  virtual ~PID();
+
+  /*
+  * Initialize PID.
+  */
+  void Init(double Kp, double Ki, double Kd);
+
+  /*
+  * Update the PID error variables given cross track error.
+  */
+  void UpdateError(double cte);
+
+  /*
+  * Calculate the total PID error.
+  */
+  double TotalError();
+};
+
+#endif /* PID_H */

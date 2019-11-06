@@ -33,6 +33,6 @@ Following steps are described and recommended in Wikipedia and were done by me f
 - Set P and D to the last stable values.
 - Increase the I gain until it brings you to the setpoint with the number of oscillations desired.
 
-I#ve noted that the bias is very low so the implementation of the I" controller is not mandatory. So i've set the $Ki$ to a very low value.
+I#ve noted that the bias is very low so the implementation of the I" controller is not mandatory. So i've set the Ki to a very low value.
 
-As a outcome I've finished with following coefficients: $ [Kp = , Ki =, Kd =] $
+As a outcome I've finished with following coefficients: [Kp = 0.135 , Ki = 0.00001, Kd = 6] 
